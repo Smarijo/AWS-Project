@@ -63,3 +63,7 @@ def logout():
     logout_user()
     return redirect('/home')
 
+if __name__ == "__main__":
+    website_url = 'ec2-107-23-102-255.compute-1.amazonaws.com'
+    app.config['SERVER_NAME'] = website_url
+    app.run()
