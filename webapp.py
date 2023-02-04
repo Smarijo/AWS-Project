@@ -32,13 +32,13 @@ def login():
      
     if request.method == 'POST':
         username = request.form['username']
+        password = request.form['password']
         user = UserInfo.query.filter_by(username = username).first()
-        if user is not None and username != "" and request.form['password'] == user.password:
+        if username == "" or password == "":
+            return ("You can't leave any boxes blank")
+        elif user is not None and password == user.password:
             login_user(user)
             return redirect('/home')
-        else:
-            return ("You can't leave any boxes blank")
-     
     return render_template('login.html')
  
 @app.route('/register', methods=['POST', 'GET'])
