@@ -34,6 +34,8 @@ def login():
         if user is not None and request.form['password'] == user.password:
             login_user(user)
             return redirect('/home')
+        else:
+            return ("You can't leave any boxes blank")
      
     return render_template('login.html')
  
@@ -50,12 +52,14 @@ def register():
         password = request.form['password']
  
         if UserInfo.query.filter_by(email=email).first():
-            return ('Email already Present')
+            return ('Entered email is already Present')
         if email is not None or first_name is not None or last_name is not None or username is not None or password is not None:
             user = UserInfo(email=email, first_name=first_name, last_name=last_name, username=username, password=password)
             db.session.add(user)
             db.session.commit()
             return redirect('/login')
+        else:
+            return ("You can't leave any boxes blank")
     return render_template('register.html')
  
  
