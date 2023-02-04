@@ -39,6 +39,8 @@ def login():
         elif user is not None and password == user.password:
             login_user(user)
             return redirect('/home')
+        elif password != user.password:
+            return redirect('Incorrect password')
     return render_template('login.html')
  
 @app.route('/register', methods=['POST', 'GET'])
