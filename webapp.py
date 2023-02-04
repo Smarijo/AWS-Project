@@ -29,8 +29,8 @@ def login():
         return redirect('/home')
      
     if request.method == 'POST':
-        email = request.form['email']
-        user = UserInfo.query.filter_by(email = email).first()
+        username = request.form['username']
+        user = UserInfo.query.filter_by(username = username).first()
         if user is not None and request.form['password'] == user.password:
             login_user(user)
             return redirect('/home')
@@ -51,11 +51,11 @@ def register():
  
         if UserInfo.query.filter_by(email=email).first():
             return ('Email already Present')
-             
-        user = UserInfo(email=email, first_name=first_name, last_name=last_name, username=username, password=password)
-        db.session.add(user)
-        db.session.commit()
-        return redirect('/login')
+        if email is not None or first_name is not None or last_name is not None or username is not None or password is not None:
+            user = UserInfo(email=email, first_name=first_name, last_name=last_name, username=username, password=password)
+            db.session.add(user)
+            db.session.commit()
+            return redirect('/login')
     return render_template('register.html')
  
  
