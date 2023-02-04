@@ -53,7 +53,7 @@ def register():
  
         if UserInfo.query.filter_by(email=email).first():
             return ('Entered email is already present')
-        if email == "" or first_name == "" or last_name == "" or username == "" or password == "":
+        if email != "" or first_name != "" or last_name != "" or username != "" or password != "":
             user = UserInfo(email=email, first_name=first_name, last_name=last_name, username=username, password=password)
             db.session.add(user)
             db.session.commit()
