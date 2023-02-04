@@ -31,7 +31,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         user = UserInfo.query.filter_by(username = username).first()
-        if user is not None and request.form['password'] == user.password:
+        if user is not None and user.username != "" and request.form['password'] == user.password:
             login_user(user)
             return redirect('/home')
         else:
@@ -52,8 +52,8 @@ def register():
         password = request.form['password']
  
         if UserInfo.query.filter_by(email=email).first():
-            return ('Entered email is already Present')
-        if email is not None or first_name is not None or last_name is not None or username is not None or password is not None:
+            return ('Entered email is already present')
+        if email == "" or first_name == "" or last_name == "" or username == "" or password == "":
             user = UserInfo(email=email, first_name=first_name, last_name=last_name, username=username, password=password)
             db.session.add(user)
             db.session.commit()
