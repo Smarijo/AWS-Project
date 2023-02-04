@@ -47,10 +47,10 @@ def register():
         username = request.form['username']
         password = request.form['password']
  
-        if UserModel.query.filter_by(email=email).first():
+        if UserInfo.query.filter_by(email=email).first():
             return ('Email already Present')
              
-        user = UserModel(email=email, username=username)
+        user = UserInfo(email=email, username=username)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
