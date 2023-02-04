@@ -30,7 +30,7 @@ def login():
      
     if request.method == 'POST':
         email = request.form['email']
-        user = UserModel.query.filter_by(email = email).first()
+        user = UserInfo.query.filter_by(email = email).first()
         if user is not None and user.check_password(request.form['password']):
             login_user(user)
             return redirect('/home')
