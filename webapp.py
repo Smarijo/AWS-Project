@@ -18,7 +18,6 @@ def create_all():
     db.create_all()
      
 @app.route('/')
-@login_required
 
 @app.route('/home')
 @login_required
